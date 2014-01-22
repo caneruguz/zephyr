@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bootstrap 101 Template</title>
+    <title>JQuery Plugins</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -85,6 +85,7 @@
 				</div>
 		</div>
 
+		<div> <input type="text" class="filterable" placeholder="filter here" /> </div>
 	  <div class="">
 	          <h2>Aenean gravida scelerisque sodales</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac scelerisque mauris, vel hendrerit ipsum. Ut accumsan odio non molestie accumsan. Donec consequat sem nec lorem blandit, gravida ornare elit malesuada. Vivamus et ipsum vitae diam iaculis accumsan ut non leo. Nunc in augue magna. Nam mollis posuere velit id condimentum. Nullam nunc odio, accumsan sed posuere in, rutrum eget risus. Pellentesque in arcu libero. Nulla iaculis diam sit amet ultricies porttitor. Donec accumsan scelerisque enim, ac laoreet sem pulvinar sit amet. Cras rhoncus sem et odio laoreet tincidunt. In hac habitasse platea dictumst.</p>
@@ -121,9 +122,11 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/knockout-3.0.0.js"></script>
     <script src="js/zephyr.js"></script>
+    <script src="js/filterable.js"></script>
     <script type="text/javascript"> 
 	    $(document).ready(function(){
 
+			$('.filterable').filterable({'selector' : 'h2', 'fade' : true, 'complete' : function(){ console.log('done!'); }}); 
 	    });  
 	    
     </script>
