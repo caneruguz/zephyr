@@ -17,7 +17,7 @@
 .cm-content {
 	margin-top:-40px;
 	overflow:scroll;
-	margin-left:20px;
+	padding: 5px;
 }
 
 .cm-band {
@@ -87,7 +87,6 @@
 	padding:10px;
 	border-left:3px solid #efefef;
 	margin:5px;
-	margin-left:20px;
 	background:#fff;
 	margin-right:-5px;
 }
@@ -126,4 +125,7 @@
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
 	border-radius:3px;
+}
+.highlight {
+	background: rgba(255,237,41,0.48)
 }

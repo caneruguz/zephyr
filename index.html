@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>JQuery Plugins</title>
+    <title>Page Wide Comments</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -14,7 +14,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body data-bind="event: { mouseup: tabDragUp, mousemove: bandDrag}"> 
 	  <div class="container">
       <div class="header">
         <h3 class="text-muted">Project name</h3>
@@ -50,23 +50,22 @@
         </div>
       </div>
 
-		<div class="cm-window">
+		<div class="cm-window" data-bind="visible: sidebar">
 		        <div class="cm-pullTab" data-bind="click: panel"><span class="glyphicon glyphicon-comment"></span></div>
-		        <div class="cm-band"> </div>
-<!-- data-bind="event: { mousedown: tabDragDown, mouseup: tabDragUp, mousemove: bandDrag }" -->
+		        <div class="cm-band" data-bind="event: { mousedown: tabDragDown, mouseup: tabDragUp, mousemove: bandDrag }"> </div>
 		        <div class="cm-content">
-		        	<p style="text-align:center"> Commenting mode is ON </p>
 		        	<div class="cm-comment">        	
 		        		<div> 
-		        			<textarea class="cm-box" placeholder="Add your comment"> </textarea>
-		        			<button class="cm-addComment btn btn-primary btn-block">Add Comment</button>
+		        			<textarea class="cm-box" placeholder="Add your comment" data-bind="value: latestComment"> </textarea>
+		        			<button data-bind="click: makeComment" class="cm-addComment btn btn-primary btn-block">Add Comment</button>
 		        			<hr class="soften" /> 
 		        		</div>
 		        	</div>
 		        	<div class="cm-load"> 
 		                	<h3 class="cm-title" style="text-align: center"> Discussions  </h3>
 		                	<p> <input type="text" class="cm-filter" placeholder="Filter comments">  </p>
-							<div class="cm-wrapper" postid="0" data-bind="foreach: load">
+							<div class="cm-wrapper cm-commentBox" postid="0" >
+<!--
 									<div class='cm-commentBox'> 
 										<div class='cm-commentText' postid='"+m.id+"' source='"+m.textSource+"'>
 											<b data-bind="text: username"></b>
@@ -75,6 +74,7 @@
 											</span><br /><span data-bind="text: content"></span>
 										</div>
 									</div>
+-->
 					
 					
 					
@@ -85,7 +85,6 @@
 				</div>
 		</div>
 
-		<div> <input type="text" class="filterable" placeholder="filter here" /> </div>
 	  <div class="">
 	          <h2>Aenean gravida scelerisque sodales</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac scelerisque mauris, vel hendrerit ipsum. Ut accumsan odio non molestie accumsan. Donec consequat sem nec lorem blandit, gravida ornare elit malesuada. Vivamus et ipsum vitae diam iaculis accumsan ut non leo. Nunc in augue magna. Nam mollis posuere velit id condimentum. Nullam nunc odio, accumsan sed posuere in, rutrum eget risus. Pellentesque in arcu libero. Nulla iaculis diam sit amet ultricies porttitor. Donec accumsan scelerisque enim, ac laoreet sem pulvinar sit amet. Cras rhoncus sem et odio laoreet tincidunt. In hac habitasse platea dictumst.</p>
@@ -125,8 +124,21 @@
     <script src="js/filterable.js"></script>
     <script type="text/javascript"> 
 	    $(document).ready(function(){
-
-			$('.filterable').filterable({'selector' : 'h2', 'fade' : true, 'complete' : function(){ console.log('done!'); }}); 
+			$.ajax({
+			  dataType: "json",
+			  url: "data.json",
+			  success: function(data){
+				  comments = data; 
+				  ko.applyBindings(new CommentBoxModel(data)); 
+			  },
+			 error : function(xhr, status) {// If there was an error
+		            console.log('There was an error talking to data.json');
+		            console.log(xhr);
+		            console.log(status);
+		        } 
+			});	
+			
+			$('.cm-filter').filterable({'selector' : '.cm-commentBox', 'fade' : true, 'complete' : function(){ console.log('done!'); }}); 
 	    });  
 	    
     </script>
