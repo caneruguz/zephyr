@@ -129,3 +129,8 @@
 .highlight {
 	background: rgba(255,237,41,0.48)
 }
+
+.cm-inline {
+    margin-top: 60px;
+    padding-top: 20px;
+}

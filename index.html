@@ -23,7 +23,7 @@
       <div class="jumbotron">
         <h1>Jumbotron heading</h1>
         <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+        <p><a class="btn btn-lg btn-success" href="#" >Sign up today</a></p>
       </div>
 
       <div class="row marketing">
@@ -50,21 +50,22 @@
         </div>
       </div>
 
-		<div class="cm-window" data-bind="visible: sidebar">
-		        <div class="cm-pullTab" data-bind="click: panel"><span class="glyphicon glyphicon-comment"></span></div>
-		        <div class="cm-band" data-bind="event: { mousedown: tabDragDown, mouseup: tabDragUp, mousemove: bandDrag }"> </div>
+
+		<div class="cm-window" >
+		        <div class="cm-pullTab" ><span class="glyphicon glyphicon-comment"></span></div>
+		        <div class="cm-band"> </div>
 		        <div class="cm-content">
-		        	<div class="cm-comment">        	
+		        	<div class="cm-comment">
 		        		<div> 
-		        			<textarea class="cm-box" placeholder="Add your comment" data-bind="value: latestComment"> </textarea>
+		        			<textarea class="cm-box" placeholder="Add your comment" > </textarea>
 		        			<button data-bind="click: makeComment" class="cm-addComment btn btn-primary btn-block">Add Comment</button>
 		        			<hr class="soften" /> 
 		        		</div>
 		        	</div>
-		        	<div class="cm-load"> 
+		        	<div class="cm-load">
 		                	<h3 class="cm-title" style="text-align: center"> Discussions  </h3>
 		                	<p> <input type="text" class="cm-filter" placeholder="Filter comments">  </p>
-							<div class="cm-wrapper cm-commentBox" postid="0" >
+							<div class="cm-wrapper cm-commentBox" data-postid="0" >
 <!--
 									<div class='cm-commentBox'> 
 										<div class='cm-commentText' postid='"+m.id+"' source='"+m.textSource+"'>
@@ -75,13 +76,10 @@
 										</div>
 									</div>
 -->
-					
-					
-					
-									
-							</div>			                
+
+							</div>
 		        	</div>
-		        	
+
 				</div>
 		</div>
 
@@ -108,38 +106,23 @@
 <p>Sed cursus posuere nunc, ut convallis tellus iaculis euismod. Donec sodales in nibh sit amet scelerisque. Sed rutrum eget lacus sed laoreet. Nam mollis mattis sollicitudin. Curabitur eget vulputate nulla, sodales porttitor eros. Integer ut erat et tellus placerat bibendum. Etiam faucibus libero eu commodo dignissim. Etiam fringilla vestibulum quam, at lobortis libero interdum a. Aenean urna libero, condimentum et faucibus sit amet, blandit sit amet justo. Donec id tristique augue. Vivamus et adipiscing felis, at commodo odio.</p>
 	  
 	  </div>
-      <div class="footer">
-        <p>&copy; Company 2013</p>
-      </div>
+          <div class="cm-inline" ></div>
 
-    </div>
+
+
+          </div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/knockout-3.0.0.js"></script>
     <script src="js/zephyr.js"></script>
-    <script src="js/filterable.js"></script>
-    <script type="text/javascript"> 
+    <script type="text/javascript">
 	    $(document).ready(function(){
-			$.ajax({
-			  dataType: "json",
-			  url: "data.json",
-			  success: function(data){
-				  comments = data; 
-				  ko.applyBindings(new CommentBoxModel(data)); 
-			  },
-			 error : function(xhr, status) {// If there was an error
-		            console.log('There was an error talking to data.json');
-		            console.log(xhr);
-		            console.log(status);
-		        } 
-			});	
+                var comments = new Zephyr();
 			
-			$('.cm-filter').filterable({'selector' : '.cm-commentBox', 'fade' : true, 'complete' : function(){ console.log('done!'); }}); 
-	    });  
+	    });
 	    
     </script>
   </body>
